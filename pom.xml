@@ -10,6 +10,7 @@
     </parent>
     <groupId>com.galka</groupId>
     <artifactId>jenkins-spring-example</artifactId>
+    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>jenkins-spring-example</name>
     <description>jenkins-spring-example</description>

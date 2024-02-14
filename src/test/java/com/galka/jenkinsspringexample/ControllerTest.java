@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class JenkinsSpringExampleApplicationTests {
+class ControllerTest {
 
 
     @Autowired
@@ -24,9 +24,7 @@ class JenkinsSpringExampleApplicationTests {
         this.mockMvc.perform(get("/"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string("Jupi!")
+                .andExpect(content().string("It works!")
                 );
     }
-
-
 }
