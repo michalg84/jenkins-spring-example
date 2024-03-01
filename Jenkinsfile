@@ -31,26 +31,23 @@ pipeline {
 
         stage('Deploy to Tomcat') {
             steps {
-                // Define variables within the steps section (local scope)
-                def tomcat_host = 'localhost'
-                def tomcat_port = '8077'
-                def context_path = '/webapp'
+           
 
                 // Download WAR file
-                sh "scp -r target/*.war ${tomcat_host}:${tomcat_port}/webapps/${context_path}"
+                sh "scp -r target/*.war localhost:8077/webapps/wabapp"
 
                 // Deploy using Tomcat Manager API (requires JMeter plugin)
                 httpRequest(
-                    url: "http://${tomcat_host}:${tomcat_port}/manager/html/undeploy?path=${context_path}",
+                    url: "http://localhost:8077/manager/html/undeploy?path=wabapp",
                     method: 'POST',
-                    auth: [ username: 'jenkins-deploy-user', password: 'jenkins-deploy-pwd' ], // Replace with actual credentials or reference from Jenkins Credentials Store
+                    auth: [ username: "jenkins-deploy-user", password: "jenkins-deploy-pwd" ],
                     timeout: 5
                 )
 
                 httpRequest(
-                    url: "http://${tomcat_host}:${tomcat_port}/manager/html/deploy?path=${context_path}&war=/${context_path}",
+                    url: "http://localhost:8077/manager/html/deploy?path=wabapp&war=/wabapp",
                     method: 'POST',
-                    auth: [ username: 'jenkins-deploy-user', password: 'jenkins-deploy-pwd' ], // Replace with actual credentials or reference from Jenkins Credentials Store
+                    auth: [ username: "jenkins-deploy-user", password: "jenkins-deploy-pwd" ],
                     timeout: 5
                 )
             }
