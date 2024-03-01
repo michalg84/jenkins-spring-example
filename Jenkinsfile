@@ -23,13 +23,17 @@ pipeline {
             }
         }
 
+//         stage('Test') {
+//             steps {
+//                 bat 'mvn test'
+//             }
+//         }
+
         stage('Deploy to Tomcat') {
             steps {
                 // Define variables within the steps section (local scope)
                 def tomcat_host = 'localhost'
                 def tomcat_port = '8077'
-                def tomcat_manager_user = 'jenkins-deploy-user'
-                def tomcat_manager_password = 'jenkins-deploy-pwd'
                 def context_path = '/webapp'
 
                 // Download WAR file
@@ -39,14 +43,14 @@ pipeline {
                 httpRequest(
                     url: "http://${tomcat_host}:${tomcat_port}/manager/html/undeploy?path=${context_path}",
                     method: 'POST',
-                    auth: [ username: tomcat_manager_user, password: tomcat_manager_password ],
+                    auth: [ username: 'jenkins-deploy-user', password: 'jenkins-deploy-pwd' ], // Replace with actual credentials or reference from Jenkins Credentials Store
                     timeout: 5
                 )
 
                 httpRequest(
                     url: "http://${tomcat_host}:${tomcat_port}/manager/html/deploy?path=${context_path}&war=/${context_path}",
                     method: 'POST',
-                    auth: [ username: tomcat_manager_user, password: tomcat_manager_password ],
+                    auth: [ username: 'jenkins-deploy-user', password: 'jenkins-deploy-pwd' ], // Replace with actual credentials or reference from Jenkins Credentials Store
                     timeout: 5
                 )
             }
