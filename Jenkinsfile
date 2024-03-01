@@ -29,9 +29,32 @@ pipeline {
 //             }
 //         }
 
-        stage('Deploy') {
+         stage('Deploy to Tomcat') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'Tomcat9Credentials', url: 'http://localhost:8077/')], contextPath: 'webapp', war: '**/*.war'
+                // Replace with actual values
+                tomcat_host = 'localhost'
+                tomcat_port = '8077'
+                tomcat_manager_user = 'jenkins-deploy-user'
+                tomcat_manager_password = 'jenkins-deploy-pwd' 
+                context_path = '/webapp' 
+
+                // Download WAR file
+                sh "scp -r target/*.war ${tomcat_host}:${tomcat_port}/webapps/${context_path}"
+
+                // Deploy using Tomcat Manager API (requires JMeter plugin)
+                httpRequest(
+                    url: "http://${tomcat_host}:${tomcat_port}/manager/html/undeploy?path=${context_path}",
+                    method: 'POST',
+                    auth: [ username: tomcat_manager_user, password: tomcat_manager_password ],
+                    timeout: 5
+                )
+
+                httpRequest(
+                    url: "http://${tomcat_host}:${tomcat_port}/manager/html/deploy?path=${context_path}&war=/${context_path}",
+                    method: 'POST',
+                    auth: [ username: tomcat_manager_user, password: tomcat_manager_password ],
+                    timeout: 5
+                )
             }
         }
     }
