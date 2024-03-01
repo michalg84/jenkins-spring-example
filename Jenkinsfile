@@ -29,15 +29,13 @@ pipeline {
 //             }
 //         }
 
-        // Define variables outside of any stage (use with caution)
-        def tomcat_host = 'localhost'
-        def tomcat_port = '8077'
-        def tomcat_manager_user = 'jenkins-deploy-user'
-        def tomcat_manager_password = 'jenkins-deploy-pwd'
-        def context_path = '/webapp'
-
         stage('Deploy to Tomcat') {
             steps {
+                def tomcat_host = 'localhost'
+                def tomcat_port = '8077'
+                def tomcat_manager_user = 'jenkins-deploy-user'
+                def tomcat_manager_password = 'jenkins-deploy-pwd'
+                def context_path = '/webapp'
 
                 // Download WAR file
                 sh "scp -r target/*.war ${tomcat_host}:${tomcat_port}/webapps/${context_path}"
