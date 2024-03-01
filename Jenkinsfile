@@ -23,11 +23,11 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
+//         stage('Test') {
+//             steps {
 //                 bat 'mvn test'
-            }
-        }
+//             }
+//         }
 
         stage('Deploy') {
             steps {
