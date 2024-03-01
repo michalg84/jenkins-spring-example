@@ -23,14 +23,9 @@ pipeline {
             }
         }
 
-//         stage('Test') {
-//             steps {
-//                 bat 'mvn test'
-//             }
-//         }
-
         stage('Deploy to Tomcat') {
             steps {
+                // Define variables within the steps section (local scope)
                 def tomcat_host = 'localhost'
                 def tomcat_port = '8077'
                 def tomcat_manager_user = 'jenkins-deploy-user'
