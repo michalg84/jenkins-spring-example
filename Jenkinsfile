@@ -5,6 +5,11 @@ pipeline {
         maven "M3"
         jdk "JDK17"
     }
+     tomcat_host = 'localhost'
+            tomcat_port = '8077'
+            tomcat_manager_user = 'jenkins-deploy-user'
+            tomcat_manager_password = 'jenkins-deploy-pwd'
+            context_path = '/webapp'
 
     stages {
         stage('Checkout') {
@@ -30,11 +35,7 @@ pipeline {
 //         }
 
          stage('Deploy to Tomcat') {
-            tomcat_host = 'localhost'
-            tomcat_port = '8077'
-            tomcat_manager_user = 'jenkins-deploy-user'
-            tomcat_manager_password = 'jenkins-deploy-pwd'
-            context_path = '/webapp'
+           
              steps {
 
 
