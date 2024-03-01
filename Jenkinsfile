@@ -34,7 +34,7 @@ pipeline {
            
 
                 // Download WAR file
-                sh "scp -r target/*.war localhost:8077/webapps/wabapp"
+                bat "copy target/*.war localhost:8077/webapps/webapp"
 
                 // Deploy using Tomcat Manager API (requires JMeter plugin)
                 httpRequest(
