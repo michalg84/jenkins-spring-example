@@ -19,6 +19,14 @@ public final class LoginUserRequest {
         return password;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
