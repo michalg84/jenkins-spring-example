@@ -1,8 +1,7 @@
 package com.galka.jenkinsspringexample;
 
+import ch.qos.logback.classic.Logger;
 import com.galka.jenkinsspringexample.repository.UserRepository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,7 @@ import java.util.Optional;
 @RequestMapping(path = "/")
 public class Controller {
 
-    Logger logger = LogManager.getLogger(Controller.class);
+    Logger logger = (Logger) org.slf4j.LoggerFactory.getLogger(Controller.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -53,7 +52,8 @@ public class Controller {
 
 @ControllerAdvice
 class ErrorHandler {
-    Logger logger = LogManager.getLogger(ErrorHandler.class);
+    Logger logger = (Logger) org.slf4j.LoggerFactory.getLogger(Controller.class);
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handle(Exception e) {
         logger.error("Exception: {}", e.getMessage());
