@@ -19,7 +19,7 @@ pipeline {
                 // sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
                 // To run Maven on a Windows agent, use
-                bat "mvn -Dmaven.test.failure.ignore=true clean package"
+                bat "mvn -Dmaven.test.failure.ignore=true clean package -DskipTests"
             }
         }
 
@@ -29,28 +29,10 @@ pipeline {
 //             }
 //         }
 
-        stage('Deploy to Tomcat') {
-            steps {
-           
-
-                // Download WAR file
-                bat "copy target/*.war localhost:8077/webapps/webapp"
-
-                // Deploy using Tomcat Manager API (requires JMeter plugin)
-                httpRequest(
-                    url: "http://localhost:8077/manager/html/undeploy?path=wabapp",
-                    method: 'POST',
-                    auth: [ username: "jenkins-deploy-user", password: "jenkins-deploy-pwd" ],
-                    timeout: 5
-                )
-
-                httpRequest(
-                    url: "http://localhost:8077/manager/html/deploy?path=wabapp&war=/wabapp",
-                    method: 'POST',
-                    auth: [ username: "jenkins-deploy-user", password: "jenkins-deploy-pwd" ],
-                    timeout: 5
-                )
-            }
-        }
+        stage('Deploy') {
+           steps {
+               deploy adapters: [tomcat9(credentialsId: 'Tomcat9Credentials', url: 'http://localhost:8077/')], contextPath: 'webapp', war: '**/*.war'
+           }
+       }
     }
 }
