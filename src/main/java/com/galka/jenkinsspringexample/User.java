@@ -1,8 +1,9 @@
 package com.galka.jenkinsspringexample;
 
-import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+
+import javax.persistence.*;
 
 
 @Data
@@ -11,7 +12,7 @@ import lombok.Data;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     private String username;
