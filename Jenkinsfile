@@ -25,6 +25,7 @@ pipeline {
         }
         stage('Publish JaCoCo Coverage Report') {
                     steps {
+                    script{
                         // Windows Path handling:
                         def execFile = "${env.WORKSPACE}/**/*.exec" // Pattern for JaCoCo exec files
                         def classFile = "${env.WORKSPACE}/**/*.class" // Pattern for class files
@@ -35,7 +36,7 @@ pipeline {
                                   classFile: classFile,
                                   execFile: execFile,
                                   sourceFile: sourceFile
-                    }
+                    }}
                 }
 
         stage('Test') {
