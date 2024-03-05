@@ -19,8 +19,7 @@ pipeline {
                 // sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
                 // To run Maven on a Windows agent, use
-                bat "mvn -Dmaven.test.failure.ignore=true clean package -D'spring.profiles.active=test'"
-"
+                bat "mvn -Dmaven.test.failure.ignore=true clean package -Dspring.profiles.active=test"
             }
         }
 
