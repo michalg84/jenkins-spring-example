@@ -29,7 +29,7 @@ pipeline {
                             classPattern: '**/*.class', // Pattern for class files
                             sourcePattern: 'src/main/java/**/*.java' // Adjust paths as needed
                         )
-                        publishCoverage adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')]
+                        publishCoverage adapters: [jacocoAdapter('target/site/jacoco/jacoco.xml')]
 
                     }
                 }
