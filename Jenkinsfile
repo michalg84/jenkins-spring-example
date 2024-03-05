@@ -20,17 +20,19 @@ pipeline {
 
                 // To run Maven on a Windows agent:
                 bat "mvn -Dmaven.test.failure.ignore=true clean package -Dspring.profiles.active=test"
+                 post {
+                        success {
+                            jacoco(
+                                execPattern: '**/build/jacoco/*.exec',
+                                classPattern: '**/build/classes/java/main',
+                                sourcePattern: '**/src/main'
+                            )
+                        }
+                    }
             }
         }
 
-        stage('Publish JaCoCo Coverage Report') {
-            steps {
-               coverage envVarName: 'JACOCO_REPORT', type: 'jacoco',
-                          classFile: "${env.WORKSPACE}/**/*.class",
-                          execFile: "${env.WORKSPACE}/**/*.exec",
-                          sourceFile: "${env.WORKSPACE}/src/main/java/**/*.java"
-            }
-        }
+
 
         stage('Test') {
             steps {
