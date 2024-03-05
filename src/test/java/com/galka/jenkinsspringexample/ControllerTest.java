@@ -3,6 +3,7 @@ package com.galka.jenkinsspringexample;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestInstance(TestInstance.Lifecycle.PER_METHOD)
 class ControllerTest {
 
 
@@ -45,7 +47,7 @@ class ControllerTest {
 
     @Test
     void testCreate() throws Exception {
-        String body = toJson(new LoginUserRequest("admin", "123asd"));
+        String body = toJson(new LoginUserRequest("mig", "123asd"));
         this.mockMvc.perform(put("/user/create")
                         .content(body)
                         .header(HttpHeaders.CONTENT_TYPE, "application/json"))

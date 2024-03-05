@@ -25,6 +25,10 @@ public class Controller {
 
     @PutMapping(path = "/user/create")
     public ResponseEntity<String> createUser(@RequestBody CreateUserRequest createUserRequest) {
+        Optional<User> byUsername = userRepository.findByUsername(createUserRequest.username());
+        if (byUsername.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Resource already exists");
+        }
         logger.info("Creating user: {}", createUserRequest);
         User user = User.builder()
                 .username(createUserRequest.username())
@@ -38,14 +42,17 @@ public class Controller {
 
     @PostMapping(path = "/user/login", consumes = "application/json")
     public ResponseEntity<String> login(@RequestBody LoginUserRequest loginUserRequest) {
+        logger.info("Logging in user: {}", loginUserRequest);
         Optional<User> user = userRepository.findByUsername(loginUserRequest.username());
+        logger.info("Fetched user: {}", user);
         return ResponseEntity.ok(
                 user.map(u -> validatePwd(u, loginUserRequest.password()))
                         .orElse("User not found"));
     }
 
-    private static String validatePwd(User user, String password) {
+    private String validatePwd(User user, String password) {
         boolean correct = user.getPassword().equals(password);
+        logger.info("Password validation result: {}", correct);
         return String.valueOf(correct);
     }
 }
