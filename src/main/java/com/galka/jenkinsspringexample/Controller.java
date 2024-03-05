@@ -23,7 +23,7 @@ public class Controller {
         return ResponseEntity.ok("It works!");
     }
 
-    @PutMapping(path = "/user/create")
+    @PutMapping(path = "/user/create", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> createUser(@RequestBody CreateUserRequest createUserRequest) {
         Optional<User> byUsername = userRepository.findByUsername(createUserRequest.username());
         if (byUsername.isPresent()) {
@@ -40,7 +40,7 @@ public class Controller {
         return ResponseEntity.status(HttpStatus.CREATED).body("User created");
     }
 
-    @PostMapping(path = "/user/login", consumes = "application/json")
+    @PostMapping(path = "/user/login", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> login(@RequestBody LoginUserRequest loginUserRequest) {
         logger.info("Logging in user: {}", loginUserRequest);
         Optional<User> user = userRepository.findByUsername(loginUserRequest.username());
