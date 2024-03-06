@@ -1,0 +1,44 @@
+###
+GET http://{{host}}:{{port}}/{{appname}}/check
+
+> {%
+    client.test("Check if app is running", function () {
+        client.assert(response.status === 200, "Should receive status 200");
+    });
+%}
+
+
+###
+POST http://{{host}}:{{port}}/{{appname}}/user/login
+Content-Type: application/json
+
+{
+"username" : "user-{{$random.uuid}}",
+"password" : "somepwd"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Should receive status 200");
+        client.assert(response.body === "User not found");
+    });
+%}
+
+
+
+###
+PUT http://{{host}}:{{port}}/{{appname}}/user/create
+Content-Type: application/json
+
+{
+  "username": "user-{{$random.uuid}}",
+  "password": "adampwd"
+}
+
+> {%
+    client.test("New user created successfully", function () {
+        client.assert(response.status === 201, "Should receive status 201");
+        client.assert(response.body === "User created");
+    });
+%}
+
