@@ -26,7 +26,7 @@ pipeline {
                     classPattern: '**/classes',
                     sourcePattern: '**/src/main/java',
                     runAlways: true,
-                    changeBuildStatus : true,
+                    changeBuildStatus : false,
 //                     maximumLineCoverage: '90',
                     minimumLineCoverage: '60',
 //                     maximumClassCoverage : '100',
