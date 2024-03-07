@@ -40,10 +40,7 @@ pipeline {
     post {
         always {
             junit keepProperties: true, stdioRetention: 'all', testResults: 'target/surefire-reports/**/*.xml'
-        }
-    }
-    post {
-        always {
+
             jacoco(
                 execPattern: '**/**.exec',
                 classPattern: '**/classes',
@@ -57,7 +54,7 @@ pipeline {
                 maximumComplexityCoverage : '90',
                 minimumComplexityCoverage : '35',
                 maximumMethodCoverage : '100',
-                maximumMethodCoverage : '60'
+                minimumMethodCoverage : '60'
             )
         }
     }
