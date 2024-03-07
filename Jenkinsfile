@@ -40,7 +40,10 @@ pipeline {
     post {
         always {
             junit keepProperties: true, stdioRetention: 'all', testResults: 'target/surefire-reports/**/*.xml'
-
+        }
+    }
+    post {
+        always {
             jacoco(
                 execPattern: '**/**.exec',
                 classPattern: '**/classes',
