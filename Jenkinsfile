@@ -22,26 +22,29 @@ pipeline {
                 bat "mvn -Dmaven.test.failure.ignore=true clean package -Dspring.profiles.active=test"
             }
         }
+
         stage('Jacoco') {
-            jacoco (
-                execPattern: '**/**.exec',
-                classPattern: '**/classes',
-                sourcePattern: '**/src/main/java',
-                runAlways: true,
-                changeBuildStatus : true,
-                maximumLineCoverage: '90',
-                minimumLineCoverage: '60',
-                maximumClassCoverage : '100',
-                minimumClassCoverage : '60',
-                maximumComplexityCoverage : '90',
-                minimumComplexityCoverage : '30',
-                maximumMethodCoverage : '100',
-                minimumMethodCoverage : '60',
-                maximumBranchCoverage : '100',
-                minimumBranchCoverage : '0',
-                maximumInstructionCoverage : '100',
-                minimumInstructionCoverage : '0'
-            )
+            steps {
+                jacoco (
+                    execPattern: '**/**.exec',
+                    classPattern: '**/classes',
+                    sourcePattern: '**/src/main/java',
+                    runAlways: true,
+                    changeBuildStatus : true,
+                    maximumLineCoverage: '90',
+                    minimumLineCoverage: '60',
+                    maximumClassCoverage : '100',
+                    minimumClassCoverage : '60',
+                    maximumComplexityCoverage : '90',
+                    minimumComplexityCoverage : '30',
+                    maximumMethodCoverage : '100',
+                    minimumMethodCoverage : '60',
+                    maximumBranchCoverage : '100',
+                    minimumBranchCoverage : '0',
+                    maximumInstructionCoverage : '100',
+                    minimumInstructionCoverage : '0'
+                )
+            }
         }
 
 
