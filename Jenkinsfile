@@ -49,7 +49,11 @@ pipeline {
                 maximumComplexityCoverage : '90',
                 minimumComplexityCoverage : '35',
                 maximumMethodCoverage : '100',
-                minimumMethodCoverage : '60'
+                minimumMethodCoverage : '60',
+                maximumBranchCoverage : '100',
+                minimumBranchCoverage : '0',
+                maximumInstructionCoverage : '100'
+                minimumInstructionCoverage : '0',
             )
         }
     }
