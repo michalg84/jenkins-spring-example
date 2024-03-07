@@ -31,7 +31,7 @@ pipeline {
 
         stage('Report Jacoco') {
             steps {
-                jacoco execPattern: '**/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java', changeBuildStatus : true, minimumLineCoverage: '60', minimumClassCoverage : '60', minimumComplexityCoverage : '35', maximumMethodCoverage : '60'
+                jacoco execPattern: '**/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java', runAlways: true, changeBuildStatus : true, minimumLineCoverage: '60', minimumClassCoverage : '60', minimumComplexityCoverage : '35', maximumMethodCoverage : '60'
             }
         }
 
