@@ -25,24 +25,13 @@ pipeline {
 
         stage('Report junit') {
             steps {
-                junit
-                keepProperties: true,
-                stdioRetention: 'all',
-                testResults: 'target/surefire-reports/**/*.xml'
+                junit keepProperties: true, stdioRetention: 'all', testResults: 'target/surefire-reports/**/*.xml'
             }
         }
 
         stage('Report Jacoco') {
             steps {
-                jacoco
-                    execPattern: '**/**.exec',
-                    classPattern: '**/classes',
-                    sourcePattern: '**/src/main/java',
-                    changeBuildStatus : true,
-                    minimumLineCoverage: '60',
-                    minimumClassCoverage : '60',
-                    minimumComplexityCoverage : '35',
-                    maximumMethodCoverage : '60'
+                jacoco execPattern: '**/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java', changeBuildStatus : true, minimumLineCoverage: '60', minimumClassCoverage : '60', minimumComplexityCoverage : '35', maximumMethodCoverage : '60'
             }
         }
 
