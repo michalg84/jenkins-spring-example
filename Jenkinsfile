@@ -53,7 +53,7 @@ j           jacoco (
                 minimumClassCoverage : '60',
                 maximumComplexityCoverage : '90',
                 minimumComplexityCoverage : '35',
-                maximumMethodCoverage : '100'
+                maximumMethodCoverage : '100',
                 maximumMethodCoverage : '60'
             )
         }
