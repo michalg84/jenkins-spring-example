@@ -26,9 +26,13 @@ pipeline {
         stage('Report Jacoco') {
             steps {
                 jacoco(
-                    execPattern: '**/*.exec', // Pattern for JaCoCo exec files
-                    classPattern: '**/*.class', // Pattern for class files
-                    sourcePattern: 'src/main/java/**/*.java' // Adjust paths as needed
+                    execPattern: '**/*.exec',
+                    classPattern: '**/*.class',
+                    sourcePattern: 'src/main/java/**/*.java',
+                    sourceInclusionPattern: '**/*.java',
+                    changeBuildStatus : true, //
+                    minimumBranchCoverage: '20',
+                    minimumClassCoverage : '20',
                 )
 
             }
