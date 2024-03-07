@@ -33,7 +33,7 @@ pipeline {
             steps {
                 jacoco(
                     execPattern: '**/*.exec',
-                    classPattern: '**/*.class',
+                    classPattern: '**classes',
                     sourcePattern: 'src/main/java/**/*.java',
                     changeBuildStatus : true,
                     minimumBranchCoverage: '20',
