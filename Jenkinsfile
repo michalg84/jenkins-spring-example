@@ -23,6 +23,12 @@ pipeline {
             }
         }
 
+        stage('Report junit') {
+            steps {
+                junit keepProperties: true, stdioRetention: '', testResults: 'target/surefire-reports/TEST-com.galka.jenkinsspringexample.ControllerTest.xml'
+            }
+        }
+
         stage('Report Jacoco') {
             steps {
                 jacoco(
@@ -30,7 +36,7 @@ pipeline {
                     classPattern: '**/*.class',
                     sourcePattern: 'src/main/java/**/*.java',
                     sourceInclusionPattern: '**/*.java',
-                    changeBuildStatus : true, //
+                    changeBuildStatus : true,
                     minimumBranchCoverage: '20',
                     minimumClassCoverage : '20',
                 )
@@ -38,11 +44,7 @@ pipeline {
             }
         }
 
-        stage('Report junit') {
-            steps {
-                junit keepProperties: true, stdioRetention: '', testResults: 'target/surefire-reports/TEST-com.galka.jenkinsspringexample.ControllerTest.xml'
-            }
-        }
+
 
 
 
