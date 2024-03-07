@@ -3,11 +3,11 @@ package com.galka.jenkinsspringexample;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@TestInstance(TestInstance.Lifecycle.PER_METHOD)
+@ActiveProfiles("test")
 class ControllerTest {
 
 
@@ -45,15 +45,25 @@ class ControllerTest {
                 .andExpect(content().string("User not found"));
     }
 
-    @Test
+@Test
     void testCreate() throws Exception {
-        String body = toJson(new LoginUserRequest("mig", "123asd"));
+        String body = toJson(new CreateUserRequest("mig", "123asd"));
         this.mockMvc.perform(put("/user/create")
                         .content(body)
                         .header(HttpHeaders.CONTENT_TYPE, "application/json"))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().string("User created"));
+    }
+
+    @Test
+    void testErrors() throws Exception {
+        String body = toJson(new LoginUserRequest(null, null));
+        this.mockMvc.perform(put("/user/login")
+                        .content(body)
+                        .header(HttpHeaders.CONTENT_TYPE, "application/json"))
+                .andDo(print())
+                .andExpect(status().isInternalServerError());
     }
 
     private String toJson(Object value) throws JsonProcessingException {
