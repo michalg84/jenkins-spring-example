@@ -22,16 +22,21 @@ pipeline {
                 bat "mvn -Dmaven.test.failure.ignore=true clean package -Dspring.profiles.active=test"
             }
         }
-        stage('Publish JaCoCo Coverage Report') {
-                    steps {
-                        jacoco(
-                            execPattern: '**/*.exec', // Pattern for JaCoCo exec files
-                            classPattern: '**/*.class', // Pattern for class files
-                            sourcePattern: 'src/main/java/**/*.java' // Adjust paths as needed
-                        )
+        stage('report tests') {
+            steps {
+                jacoco(
+                    execPattern: '**/*.exec', // Pattern for JaCoCo exec files
+                    classPattern: '**/*.class', // Pattern for class files
+                    sourcePattern: 'src/main/java/**/*.java' // Adjust paths as needed
+                )
 
-                    }
-                }
+            }
+            steps {
+                junit keepProperties: true, stdioRetention: '', testResults: 'target/surefire-reports/TEST-com.galka.jenkinsspringexample.ControllerTest.xml'
+            }
+        }
+
+
 
 
 
