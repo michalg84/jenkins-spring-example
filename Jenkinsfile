@@ -9,7 +9,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-            echo 'CHECKOUT'
                 git branch: 'main', url: 'https://github.com/michalg84/jenkins-spring-example.git'
             }
         }
@@ -26,11 +25,20 @@ pipeline {
                 echo 'TEST'
                 bat "mvn test"
             }
+             post {
+                always {
+                    echo 'Publishing JUnit test results'
+                    junit (
+                        keepProperties: true,
+                        stdioRetention: 'all',
+                        testResults: 'target/surefire-reports/**/*.xml'
+                    )
+                }
+            }
         }
 
         stage('Jacoco') {
             steps {
-            echo 'JACOCO'
                 jacoco (
                     execPattern: '**/**.exec',
                     classPattern: '**/classes',
@@ -56,7 +64,6 @@ pipeline {
 
         stage('Deploy') {
             steps {
-            echo 'DEPLOY'
                 deploy adapters: [tomcat9(credentialsId: 'Tomcat9Credentials', url: 'http://localhost:8077/')],
                         contextPath: 'webapp',
                         war: '**/*.war'
@@ -64,13 +71,5 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            junit (
-                keepProperties: true,
-                stdioRetention: 'all',
-                testResults: 'target/surefire-reports/**/*.xml'
-            )
-        }
-    }
+
 }
