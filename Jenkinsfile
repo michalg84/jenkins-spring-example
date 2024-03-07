@@ -25,7 +25,7 @@ pipeline {
 
         stage('Report junit') {
             steps {
-                junit keepProperties: true, stdioRetention: '', testResults: 'target/surefire-reports/TEST-com.galka.jenkinsspringexample.ControllerTest.xml'
+                junit keepProperties: true, stdioRetention: '', testResults: 'target/surefire-reports/**/*.xml'
             }
         }
 
@@ -35,7 +35,6 @@ pipeline {
                     execPattern: '**/*.exec',
                     classPattern: '**/*.class',
                     sourcePattern: 'src/main/java/**/*.java',
-                    sourceInclusionPattern: '**/*.java',
                     changeBuildStatus : true,
                     minimumBranchCoverage: '20',
                     minimumClassCoverage : '20',
