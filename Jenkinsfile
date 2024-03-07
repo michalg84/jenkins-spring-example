@@ -36,8 +36,10 @@ pipeline {
                     classPattern: '**/classes',
                     sourcePattern: '**/src/main/java',
                     changeBuildStatus : true,
-                    minimumBranchCoverage: '20',
-                    minimumClassCoverage : '20',
+                    minimumLineCoverage: '60',
+                    minimumClassCoverage : '60',
+                    minimumComplexityCoverage : '35',
+                    maximumMethodCoverage : '60',
                 )
 
             }
