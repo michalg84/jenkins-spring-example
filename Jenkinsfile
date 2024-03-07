@@ -32,6 +32,7 @@ pipeline {
             }
         }
     }
+
     post {
         always {
             junit keepProperties: true, stdioRetention: 'all', testResults: 'target/surefire-reports/**/*.xml'
@@ -41,7 +42,7 @@ pipeline {
                 classPattern: '**/classes',
                 sourcePattern: '**/src/main/java',
                 runAlways: true,
-                changeBuildStatus : false,
+                changeBuildStatus : true,
                 maximumLineCoverage: '90',
                 minimumLineCoverage: '60',
                 maximumClassCoverage : '100',
