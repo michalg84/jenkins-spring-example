@@ -26,19 +26,19 @@ pipeline {
                     classPattern: '**/classes',
                     sourcePattern: '**/src/main/java',
                     runAlways: true,
-                    changeBuildStatus : false,
-//                     maximumLineCoverage: '90',
-                    minimumLineCoverage: '60',
-//                     maximumClassCoverage : '100',
-                    minimumClassCoverage : '60',
-//                     maximumComplexityCoverage : '90',
-                    minimumComplexityCoverage : '30',
-//                     maximumMethodCoverage : '100',
-                    minimumMethodCoverage : '60',
-//                     maximumBranchCoverage : '100',
-                    minimumBranchCoverage : '1',
-//                     maximumInstructionCoverage : '100',
-                    minimumInstructionCoverage : '1'
+                    changeBuildStatus : true,
+                    maximumLineCoverage: '80',
+                    minimumLineCoverage: '50',
+                    maximumClassCoverage : '80',
+                    minimumClassCoverage : '50',
+                    maximumComplexityCoverage : '33',
+                    minimumComplexityCoverage : '25',
+                    maximumMethodCoverage : '60',
+                    minimumMethodCoverage : '50',
+                    maximumBranchCoverage : '1',
+                    minimumBranchCoverage : '0',
+                    maximumInstructionCoverage : '30',
+                    minimumInstructionCoverage : '20'
                 )
             }
         }
