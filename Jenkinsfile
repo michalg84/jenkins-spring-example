@@ -22,7 +22,8 @@ pipeline {
                 bat "mvn -Dmaven.test.failure.ignore=true clean package -Dspring.profiles.active=test"
             }
         }
-        stage('report tests') {
+
+        stage('Report Jacoco') {
             steps {
                 jacoco(
                     execPattern: '**/*.exec', // Pattern for JaCoCo exec files
@@ -31,6 +32,9 @@ pipeline {
                 )
 
             }
+        }
+
+        stage('Report junit') {
             steps {
                 junit keepProperties: true, stdioRetention: '', testResults: 'target/surefire-reports/TEST-com.galka.jenkinsspringexample.ControllerTest.xml'
             }
