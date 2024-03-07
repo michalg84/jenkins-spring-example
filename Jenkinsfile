@@ -41,7 +41,7 @@ pipeline {
         always {
             junit keepProperties: true, stdioRetention: 'all', testResults: 'target/surefire-reports/**/*.xml'
 
-            jacoco (
+            jacoco(
                 execPattern: '**/**.exec',
                 classPattern: '**/classes',
                 sourcePattern: '**/src/main/java',
