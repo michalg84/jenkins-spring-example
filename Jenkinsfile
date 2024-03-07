@@ -9,24 +9,28 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+            echo 'CHECKOUT'
                 git branch: 'main', url: 'https://github.com/michalg84/jenkins-spring-example.git'
             }
         }
 
         stage('Build') {
             steps {
+            echo 'BUILD'
                 bat "mvn -B -DskipTests clean package"
             }
         }
 
         stage('Test') {
             steps {
+                echo 'TEST'
                 bat "mvn test"
             }
         }
 
         stage('Jacoco') {
             steps {
+            echo 'JACOCO'
                 jacoco (
                     execPattern: '**/**.exec',
                     classPattern: '**/classes',
@@ -52,6 +56,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
+            echo 'DEPLOY'
                 deploy adapters: [tomcat9(credentialsId: 'Tomcat9Credentials', url: 'http://localhost:8077/')],
                         contextPath: 'webapp',
                         war: '**/*.war'
