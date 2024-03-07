@@ -1,7 +1,10 @@
 package com.galka.jenkinsspringexample;
 
 import ch.qos.logback.classic.Logger;
+import com.galka.jenkinsspringexample.model.User;
 import com.galka.jenkinsspringexample.repository.UserRepository;
+import com.galka.jenkinsspringexample.request.CreateUserRequest;
+import com.galka.jenkinsspringexample.request.LoginUserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,14 +28,14 @@ public class Controller {
 
     @PutMapping(path = "/user/create", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> createUser(@RequestBody CreateUserRequest createUserRequest) {
-        Optional<User> byUsername = userRepository.findByUsername(createUserRequest.username());
+        Optional<User> byUsername = userRepository.findByUsername(createUserRequest.getUsername());
         if (byUsername.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Resource already exists");
         }
         logger.info("Creating user: {}", createUserRequest);
         User user = User.builder()
-                .username(createUserRequest.username())
-                .password(createUserRequest.password())
+                .username(createUserRequest.getUsername())
+                .password(createUserRequest.getPassword())
                 .build();
         logger.info("Attempting to save user: {}", user);
         userRepository.save(user);
@@ -43,10 +46,10 @@ public class Controller {
     @PostMapping(path = "/user/login", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> login(@RequestBody LoginUserRequest loginUserRequest) {
         logger.info("Logging in user: {}", loginUserRequest);
-        Optional<User> user = userRepository.findByUsername(loginUserRequest.username());
+        Optional<User> user = userRepository.findByUsername(loginUserRequest.getUsername());
         logger.info("Fetched user: {}", user);
         return ResponseEntity.ok(
-                user.map(u -> validatePwd(u, loginUserRequest.password()))
+                user.map(u -> validatePwd(u, loginUserRequest.getPassword()))
                         .orElse("User not found"));
     }
 

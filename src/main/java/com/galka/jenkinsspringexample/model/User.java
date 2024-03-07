@@ -1,4 +1,4 @@
-package com.galka.jenkinsspringexample;
+package com.galka.jenkinsspringexample.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
