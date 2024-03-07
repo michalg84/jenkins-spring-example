@@ -58,8 +58,7 @@ pipeline {
             junit (
                 keepProperties: true,
                 stdioRetention: 'all',
-                testResults: 'target/surefire-reports/**/*.xml',
-                console: true
+                testResults: 'target/surefire-reports/**/*.xml'
             )
         }
     }
