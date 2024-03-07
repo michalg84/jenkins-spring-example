@@ -40,9 +40,9 @@ pipeline {
                     maximumMethodCoverage : '100',
                     minimumMethodCoverage : '60',
                     maximumBranchCoverage : '100',
-                    minimumBranchCoverage : '0',
+                    minimumBranchCoverage : '1',
                     maximumInstructionCoverage : '100',
-                    minimumInstructionCoverage : '0'
+                    minimumInstructionCoverage : '1'
                 )
             }
         }
