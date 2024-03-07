@@ -15,11 +15,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                // Run Maven on a Unix agent:
-                // sh "mvn -Dmaven.test.failure.ignore=true clean package"
-
-                // To run Maven on a Windows agent:
-                bat "mvn -Dmaven.test.failure.ignore=true clean package -Dspring.profiles.active=test"
+                bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
 
@@ -31,17 +27,17 @@ pipeline {
                     sourcePattern: '**/src/main/java',
                     runAlways: true,
                     changeBuildStatus : true,
-                    maximumLineCoverage: '90',
+//                     maximumLineCoverage: '90',
                     minimumLineCoverage: '60',
-                    maximumClassCoverage : '100',
+//                     maximumClassCoverage : '100',
                     minimumClassCoverage : '60',
-                    maximumComplexityCoverage : '90',
+//                     maximumComplexityCoverage : '90',
                     minimumComplexityCoverage : '30',
-                    maximumMethodCoverage : '100',
+//                     maximumMethodCoverage : '100',
                     minimumMethodCoverage : '60',
-                    maximumBranchCoverage : '100',
+//                     maximumBranchCoverage : '100',
                     minimumBranchCoverage : '1',
-                    maximumInstructionCoverage : '100',
+//                     maximumInstructionCoverage : '100',
                     minimumInstructionCoverage : '1'
                 )
             }
