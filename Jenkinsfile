@@ -23,11 +23,6 @@ pipeline {
             }
         }
 
-        stage('Report junit') {
-            steps {
-            }
-        }
-
 
         stage('Deploy') {
             steps {
