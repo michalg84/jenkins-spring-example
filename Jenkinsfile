@@ -55,7 +55,12 @@ pipeline {
 
     post {
         always {
-            junit keepProperties: true, stdioRetention: 'all', testResults: 'target/surefire-reports/**/*.xml'
+            junit (
+                keepProperties: true,
+                stdioRetention: 'all',
+                testResults: 'target/surefire-reports/**/*.xml',
+                console: true
+            )
         }
     }
 }
