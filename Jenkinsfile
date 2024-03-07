@@ -22,22 +22,8 @@ pipeline {
                 bat "mvn -Dmaven.test.failure.ignore=true clean package -Dspring.profiles.active=test"
             }
         }
-
-
-        stage('Deploy') {
-            steps {
-                deploy adapters: [tomcat9(credentialsId: 'Tomcat9Credentials', url: 'http://localhost:8077/')],
-                        contextPath: 'webapp',
-                        war: '**/*.war'
-            }
-        }
-    }
-
-    post {
-        always {
-            junit keepProperties: true, stdioRetention: 'all', testResults: 'target/surefire-reports/**/*.xml'
-
-            jacoco(
+        stage('Jacoco') {
+            jacoco (
                 execPattern: '**/**.exec',
                 classPattern: '**/classes',
                 sourcePattern: '**/src/main/java',
@@ -56,6 +42,21 @@ pipeline {
                 maximumInstructionCoverage : '100',
                 minimumInstructionCoverage : '0'
             )
+        }
+
+
+        stage('Deploy') {
+            steps {
+                deploy adapters: [tomcat9(credentialsId: 'Tomcat9Credentials', url: 'http://localhost:8077/')],
+                        contextPath: 'webapp',
+                        war: '**/*.war'
+            }
+        }
+    }
+
+    post {
+        always {
+            junit keepProperties: true, stdioRetention: 'all', testResults: 'target/surefire-reports/**/*.xml'
         }
     }
 }
