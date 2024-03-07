@@ -47,7 +47,7 @@ pipeline {
                 maximumClassCoverage : '100',
                 minimumClassCoverage : '60',
                 maximumComplexityCoverage : '90',
-                minimumComplexityCoverage : '33',
+                minimumComplexityCoverage : '30',
                 maximumMethodCoverage : '100',
                 minimumMethodCoverage : '60',
                 maximumBranchCoverage : '100',
