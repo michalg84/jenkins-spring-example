@@ -33,6 +33,8 @@ pipeline {
                         stdioRetention: 'all',
                         testResults: 'target/surefire-reports/**/*.xml'
                     )
+                    echo 'Save artifacts'
+                    archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
                 }
             }
         }
