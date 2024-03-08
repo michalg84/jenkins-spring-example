@@ -64,7 +64,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                timeout(time: 1, unit: 'MINUTES') {
+                timeout(time: 2, unit: 'MINUTES') {
                     retry(3) {
                          deploy adapters: [tomcat9(credentialsId: 'Tomcat9Credentials', url: 'http://localhost:8077/')],
                                                 contextPath: 'webapp',
