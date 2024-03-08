@@ -34,7 +34,7 @@ pipeline {
                         testResults: 'target/surefire-reports/**/*.xml'
                     )
                     echo 'Save artifacts'
-                    archiveArtifacts artifacts: 'target/app.jar', fingerprint: true
+                    archiveArtifacts artifacts: 'target/app.war', fingerprint: true
                 }
             }
         }
