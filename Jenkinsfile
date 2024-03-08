@@ -76,17 +76,18 @@ pipeline {
 
             }
         }
-        post {
-            failure {
-                mail to: 'mgalka1@sii.pl',
-                     subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                     body: "Something is wrong with ${env.BUILD_URL}"
-            }
-            success {
-                mail to: 'mgalka1@sii.pl',
-                                     subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
-                                     body: "App was deployed ${env.BUILD_URL}"
-            }
+
+    }
+    post {
+        failure {
+            mail to: 'mgalka1@sii.pl',
+                 subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                 body: "Something is wrong with ${env.BUILD_URL}"
+        }
+        success {
+            mail to: 'mgalka1@sii.pl',
+                 subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
+                 body: "App was deployed ${env.BUILD_URL}"
         }
     }
 
