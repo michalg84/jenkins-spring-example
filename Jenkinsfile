@@ -64,9 +64,14 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'Tomcat9Credentials', url: 'http://localhost:8077/')],
-                        contextPath: 'webapp',
-                        war: '**/*.war'
+                timeout(time: 1, unit: 'MINUTES') {
+                    retry(3) {
+                         deploy adapters: [tomcat9(credentialsId: 'Tomcat9Credentials', url: 'http://localhost:8077/')],
+                                                contextPath: 'webapp',
+                                                war: '**/*.war'
+                    }
+                }
+
             }
         }
     }
