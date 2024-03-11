@@ -88,7 +88,7 @@ pipeline {
         success {
             mail to: 'params.emailRecipient',
                  subject: "Build Success: ${currentBuild.fullDisplayName} #${currentBuild.number}",
-                 body: "App was deployed ${env.BUILD_URL}". Tests ${env.TEST}
+                 body: "App was deployed ${env.BUILD_URL}. Tests ${env.TEST}"
             echo "Success message sent to params.emailRecipient"
 
         }
