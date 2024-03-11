@@ -80,16 +80,20 @@ pipeline {
     }
     post {
         failure {
-            mail to: 'params.emailRecipment',
-                 subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                 body: "Something is wrong with ${env.BUILD_URL}"
-             echo "Failure message sent to params.emailRecipment"
+            mail to: 'params.emailRecipient',
+                 subject: "Build Failure: ${currentBuild.fullDisplayName} #${currentBuild.number} ",
+                 body: buildFailureNotification(currentBuild.fullDisplayName, currentBuild.number, env.BUILD_URL, env.TEST) {
+                    "Failed Tests: \n$failedTests"
+                 },
+                 contentType: 'text/html'
+             echo "Failure message sent to params.emailRecipient"
         }
         success {
-            mail to: 'params.emailRecipment',
-                 subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
-                 body: "App was deployed ${env.BUILD_URL}"
-            echo "Success message sent to params.emailRecipment"
+            mail to: 'params.emailRecipient',
+                 subject: "Build Success: ${currentBuild.fullDisplayName} #${currentBuild.number}",
+                 body: buildSuccessNotification(currentBuild.fullDisplayName, currentBuild.number, env.BUILD_URL, env.TEST),
+                 contentType: 'text/html'
+            echo "Success message sent to params.emailRecipient"
 
         }
     }
