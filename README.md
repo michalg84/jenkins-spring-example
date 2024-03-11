@@ -15,5 +15,6 @@ Base pipeline builds app form github, runs tests and then deploys to local Tomca
 3. **Jenkins** run command:
    - java.exe" -jar Jenkins.war --httpPort=9099
    - configure Tomcat9Credentials with username="jenkins-deploy-user" password="jenkins-deploy-pwd"
-   - create new pipeline feching from github repo and Jenkinsfile
+   - create new pipeline fetching from github repo and Jenkinsfile
+   - add parameter 'emailRecipient' with default value "<EMAIL>"
    - Start pipeline
