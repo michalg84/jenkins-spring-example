@@ -82,8 +82,7 @@ pipeline {
         failure {
             mail to: 'params.emailRecipient',
                  subject: "Build Failure: ${currentBuild.fullDisplayName} #${currentBuild.number}",
-                 body: """Something is wrong with ${env.BUILD_URL}.
-                 Tests ${env.TEST}"""
+                 body: "Something is wrong with ${env.BUILD_URL}. Tests ${env.TEST}"
              echo "Failure message sent to params.emailRecipient"
         }
         success {
