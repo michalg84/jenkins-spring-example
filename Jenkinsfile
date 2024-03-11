@@ -81,13 +81,13 @@ pipeline {
     post {
         failure {
             mail to: '${params.emailRecipient}',
-                 subject: "Build Failure: ${currentBuild.fullDisplayName},
+                 subject: "Build Failure: ${currentBuild.fullDisplayName}"",
                  body: "Something is wrong with ${env.BUILD_URL}"
              echo "Failure message sent to ${params.emailRecipient}"
         }
         success {
             mail to: '${params.emailRecipient}',
-                 subject: "Build Success: ${currentBuild.fullDisplayName},
+                 subject: "Build Success: ${currentBuild.fullDisplayName}"",
                  body: "App was deployed ${env.BUILD_URL}"
             echo "Success message sent to ${params.emailRecipient}"
 
