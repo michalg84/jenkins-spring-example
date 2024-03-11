@@ -80,16 +80,16 @@ pipeline {
     }
     post {
         failure {
-            mail to: 'mgalka1@sii.pl',
+            mail to: 'michalgalka84@gmail.com',
                  subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
                  body: "Something is wrong with ${env.BUILD_URL}"
-             echo "Failure message sent to mgalka1@sii.pl"
+             echo "Failure message sent to michalgalka84@gmail.com"
         }
         success {
-            mail to: 'mgalka1@sii.pl',
+            mail to: 'michalgalka84@gmail.com',
                  subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
                  body: "App was deployed ${env.BUILD_URL}"
-            echo "Success message sent to mgalka1@sii.pl"
+            echo "Success message sent to michalgalka84@gmail.com"
 
         }
     }
