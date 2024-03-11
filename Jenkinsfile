@@ -85,14 +85,14 @@ pipeline {
                  body: buildFailureNotification(currentBuild.fullDisplayName, currentBuild.number, env.BUILD_URL, env.TEST) {
                     "Failed Tests: \n$failedTests"
                  },
-                 contentType: 'text/html'
+                 charset: 'UTF-8'
              echo "Failure message sent to params.emailRecipient"
         }
         success {
             mail to: 'params.emailRecipient',
                  subject: "Build Success: ${currentBuild.fullDisplayName} #${currentBuild.number}",
                  body: buildSuccessNotification(currentBuild.fullDisplayName, currentBuild.number, env.BUILD_URL, env.TEST),
-                 contentType: 'text/html'
+                 charset: 'UTF-8'
             echo "Success message sent to params.emailRecipient"
 
         }
