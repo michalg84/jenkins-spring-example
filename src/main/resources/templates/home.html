@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" th:lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>  </head>
+
+</head>
+<body>
+<h1>Login</h1>
+<form th:action="@{/login}" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" th:field="${#httpServletRequest.getParameter('error') != null} ? 'error' : ''">
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    <br>
+    <button type="submit">Login</button>
+    <th:block th:if="${#httpServletRequest.getParameter('error') != null}">
+        <span style="color: red">Invalid username or password.</span>
+    </th:block>
+</form>
+</body>
+</html>
