@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.galka.jenkinsspringexample.request.CreateUserRequest;
 import com.galka.jenkinsspringexample.request.LoginUserRequest;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@TestInstance(TestInstance.Lifecycle.PER_METHOD)
+//@TestInstance(TestInstance.Lifecycle.PER_METHOD)
 class ControllerTest {
 
 
@@ -34,8 +33,7 @@ class ControllerTest {
         this.mockMvc.perform(get("/check"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string("It works!")
-                );
+                .andExpect(content().string("It works!"));
     }
 
     @Test
