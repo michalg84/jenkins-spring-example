@@ -49,7 +49,7 @@ class ControllerTest {
                 .andExpect(content().string("User not found"));
     }
 
-@Test
+    @Test
     void testCreate() throws Exception {
         String body = toJson(new CreateUserRequest("mig", "123asd"));
         this.mockMvc.perform(put("/user/create")
